@@ -1,0 +1,21 @@
+{
+  "name": "zip",
+  "version": "1.0.0",
+  "description": "",
+  "main": "download.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "adm-zip": "^0.5.9",
+    "fast-xml-parser": "^4.0.10",
+    "https": "^1.0.0",
+    "rxjs": "^7.5.6",
+    "swe-coords": "^1.0.0"
+  }
+}
