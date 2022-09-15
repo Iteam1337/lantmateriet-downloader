@@ -5,3 +5,4 @@ xml
 urls.txt
 .DS_Store
 .env
+out

@@ -10,7 +10,6 @@ const downloadFile = (url, filename) => {
   return new Promise((resolve, reject) => {
     if (fs.existsSync(filename)) return resolve(filename)
     const file = fs.createWriteStream(filename)
-    // 50012665_200001_2511.belagenhetsadress.0117.zip
     https.get(url, (response) => {
       response.pipe(file)
     })
@@ -26,9 +25,14 @@ const downloadFile = (url, filename) => {
 
 const unzip = (filename) => {
   return new Promise((resolve, reject) => {
+    try {
     const zip = new AdmZip(filename)
     zip.extractAllTo('xml', true)
-    resolve(filename.replace('.zip', '.xml').replace('download/', 'xml/'))
+      resolve(filename.replace('.zip', '.xml').replace('download/', 'xml/'))
+    } catch (err) {
+      reject('Error when reading file:' + filename + ', error:' + err.message)
+    }
+      
   })
 }
 
