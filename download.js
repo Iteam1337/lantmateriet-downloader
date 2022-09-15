@@ -8,8 +8,9 @@ const urls = fs.readFileSync('urls.txt').toString().split('\n')
 
 const downloadFile = (url, filename) => {
   return new Promise((resolve, reject) => {
-    if (fs.existsSync(filename) && fs.unlinkSync(filename)) return resolve(filename)
+    if (fs.existsSync(filename)) return resolve(filename)
     const file = fs.createWriteStream(filename)
+    // 50012665_200001_2511.belagenhetsadress.0117.zip
     https.get(url, (response) => {
       response.pipe(file)
     })
@@ -31,10 +32,9 @@ const unzip = (filename) => {
   })
 }
 
-
-const downloadFiles = (urls) =>
+const downloadUrls = (urls) =>
   from(urls).pipe(
-    take(2),
+    //take(2),
     concatMap(url => downloadFile(url, path.join('download', url.split('/').pop()))),
     mergeMap(unzip),
     map(parse),
@@ -44,4 +44,6 @@ const downloadFiles = (urls) =>
     startWith(header()),
   )
 
-downloadFiles(urls).subscribe(console.log)
+module.exports = {
+  downloadUrls
+}
